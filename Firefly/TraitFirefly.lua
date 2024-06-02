@@ -3,7 +3,7 @@ if config.Enabled == true then
 	function CreateFireflyBoon()
 		game.TraitData.FireflyWeaponBoon = {
 		--adding this to hermes
-			Icon = "Hermes_01",
+			Icon = "Boon_Hermes_28",
 			InheritFrom = { "BaseTrait", "LegacyTrait", "EarthBoon" },
 			RarityLevels =
 			{
