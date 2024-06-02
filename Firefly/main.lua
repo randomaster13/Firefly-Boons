@@ -36,7 +36,8 @@ public.config = config
 
 local function on_ready()
     if config.Enabled == false then return end
-    import 'sjson.lua'
+    print("Should be working")
+	import 'sjson.lua'
 
     import 'TraitFirefly.lua'
 end
