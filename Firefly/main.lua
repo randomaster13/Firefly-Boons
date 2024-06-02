@@ -35,16 +35,14 @@ config = chalk.auto 'config.lua'
 public.config = config
 
 local function on_ready()
-    if config.Enabled == false then return end
-    print("Should be working")
 	import 'sjson.lua'
-
-    import 'TraitFirefly.lua'
+    
+    if config.Enabled == true then
+        import 'TraitFirefly.lua'
+    end
 end
 
 local function on_reload()
-    if config.Enabled == false then return end
-    print("Should be working")
     import 'reload.lua'
 end
 
