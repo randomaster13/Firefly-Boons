@@ -1,6 +1,6 @@
 ---@meta _
 -- grabbing our dependencies,
--- I did not come up with this myself, i did take this from zanncdwbl's keepsake port mod, because it works in their mod
+-- I did not come up with this myself, i did take this from zanncdwbl's keepsake port mod, because it works in their mod and I wouldn't have known what to do.
 -- these funky (---@) comments are just there to help VS Code find the definitions of things
 
 ---@diagnostic disable-next-line: undefined-global
@@ -29,8 +29,6 @@ chalk = mods["SGG_Modding-Chalk"]
 
 ---@module 'SGG_Modding-ReLoad'
 reload = mods['SGG_Modding-ReLoad']
-
---if I had to guess, the comment @s are for github.
 
 ---@module 'Firefly-config'
 config = chalk.auto 'config.lua'
