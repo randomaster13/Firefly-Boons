@@ -46,9 +46,9 @@ function CreateFireflyBoon()
             SpeedMultiplier = { BaseValue = 1.10, SourceIsMultiplier = true },
         },
         StatLines =
-        {
-            "FireflyWeaponBoon", -- Changed this to the correct name
-        },
+		{
+			"AttackSpeedStatDisplay1",
+		},
         ExtractValues =
         {
             {
