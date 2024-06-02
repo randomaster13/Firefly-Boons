@@ -1,69 +1,67 @@
 if config.Enabled == true then
 
 	function CreateFireflyBoon()
-		game.TraitData.FireflyWeaponBoon {
+		game.TraitData.FireflyWeaponBoon = {
 		--adding this to hermes
-		FireflyWeaponBoon =
+			Icon = "Hermes_01",
+			InheritFrom = { "BaseTrait", "LegacyTrait", "EarthBoon" },
+			RarityLevels =
 			{
-				Icon = "Boon_Hermes_01",
-				InheritFrom = { "BaseTrait", "LegacyTrait", "EarthBoon" },
-				RarityLevels =
+				Common =
 				{
-					Common =
-					{
-						Multiplier = 1.0,
-					},
-					Rare =
-					{
-						Multiplier = 1.5,
-					},
-					Epic =
-					{
-						Multiplier = 2.0,
-					},
-					Heroic =
-					{
-						Multiplier = 2.5,
-					},
+					Multiplier = 1.0,
 				},
-				PropertyChanges = {
-					{
-						WeaponNames = game.WeaponSets.HeroPrimaryWeapons,
-						BaseValue = 0.9,
-						SourceIsMultiplier = true,
-						SpeedPropertyChanges = true,
-					}
+				Rare =
+				{
+					Multiplier = 1.5,
 				},
-				WeaponSpeedMultiplier =
+				Epic =
+				{
+					Multiplier = 2.0,
+				},
+				Heroic =
+				{
+					Multiplier = 2.5,
+				},
+			},
+			PropertyChanges = {
 				{
 					WeaponNames = game.WeaponSets.HeroPrimaryWeapons,
-					Value = 
-					{
-						BaseValue = 0.9,
-						SourceIsMultiplier = true,
-					},
-					ReportValues = { ReportedWeaponMultiplier = "Value" }
-				},
-				AllyDataModifiers =
-				{
-					SpeedMultiplier = { BaseValue = 1.10, SourceIsMultiplier = true },
-				},
-				StatLines =
-				{
-					"AttackSpeedStatDisplay1",
-				},
-				ExtractValues =
-				{
-					{
-							Key = "ReportedWeaponMultiplier",
-							ExtractAs = "TooltipDamageBonus",
-							Format = "NegativePercentDelta",
-					},
+					BaseValue = 0.9,
+					SourceIsMultiplier = true,
+					SpeedPropertyChanges = true,
 				}
+			},
+			WeaponSpeedMultiplier =
+			{
+				WeaponNames = game.WeaponSets.HeroPrimaryWeapons,
+				Value = 
+				{
+					BaseValue = 0.9,
+					SourceIsMultiplier = true,
+				},
+				ReportValues = { ReportedWeaponMultiplier = "Value" }
+			},
+			AllyDataModifiers =
+			{
+				SpeedMultiplier = { BaseValue = 1.10, SourceIsMultiplier = true },
+			},
+			StatLines =
+			{
+				"AttackSpeedStatDisplay1",
+			},
+			ExtractValues =
+			{
+				{
+						Key = "ReportedWeaponMultiplier",
+						ExtractAs = "TooltipDamageBonus",
+						Format = "NegativePercentDelta",
+				},
 			}
+
 		}
 
-		table.insert(game.LootSetData.Hermes.Traits, "FireflyWeaponBoon")
+		table.insert(game.LootSetData.Hermes.HermesUpgrade.Traits, "FireflyWeaponBoon")
 	end
 
 	CreateFireflyBoon()
