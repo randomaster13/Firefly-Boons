@@ -1,7 +1,7 @@
 if config.Enabled == true then
 
 	function CreateFireflyBoon()
-		TraitData.HermesBoon {
+		game.TraitData.FireflyWeaponBoon {
 		--adding this to hermes
 		FireflyWeaponBoon =
 			{
@@ -28,7 +28,7 @@ if config.Enabled == true then
 				},
 				PropertyChanges = {
 					{
-						WeaponNames = WeaponSets.HeroPrimaryWeapons,
+						WeaponNames = game.WeaponSets.HeroPrimaryWeapons,
 						BaseValue = 0.9,
 						SourceIsMultiplier = true,
 						SpeedPropertyChanges = true,
@@ -36,7 +36,7 @@ if config.Enabled == true then
 				},
 				WeaponSpeedMultiplier =
 				{
-					WeaponNames = WeaponSets.HeroPrimaryWeapons,
+					WeaponNames = game.WeaponSets.HeroPrimaryWeapons,
 					Value = 
 					{
 						BaseValue = 0.9,
