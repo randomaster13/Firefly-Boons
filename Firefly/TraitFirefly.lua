@@ -72,6 +72,12 @@ if config.Enabled == true then
 		InheritFrom = "BaseBoonMultiline",
 		DisplayName = "A Million Fire Flies",
       	Description = "Your {$Keywords.AttackSet} are faster.",
-	})
+	}, Order) -- Don't forget the order, this is important
 
+    -- Pass in the (Global) file name you defined in sjson.lua
+    sjson.hook(TraitTextFile, function(data)
+        --data.texts is found at the top of the file, its the Texts table, it is different per file, second arguement is your local above
+        table.insert(data.Texts, TraitFirefly)
+        print("Hermes Boon Hook completed")
+    end)
 end
