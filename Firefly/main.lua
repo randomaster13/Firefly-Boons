@@ -38,6 +38,7 @@ local function on_ready()
 	import 'sjson.lua'
     
     if config.Enabled == true then
+        import 'FireflyEffectData.lua'
         import 'TraitFirefly.lua'
     end
 end
@@ -48,6 +49,7 @@ end
 
 local loader = reload.auto_single()
 
-modutil.on_ready_final(function()
+--once_loaded.game is replacing on_ready_final here
+modutil.once_loaded.game(function()
     loader.load(on_ready, on_reload)
 end)

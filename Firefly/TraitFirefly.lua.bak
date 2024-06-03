@@ -19,7 +19,7 @@ function CreateFireflyBoon()
             },
             Heroic =
             {
-                Multiplier = 2.49,
+                Multiplier = 10.0,
             },
         },
         PropertyChanges = {
@@ -31,24 +31,25 @@ function CreateFireflyBoon()
 			},
             {
                 WeaponNames = game.WeaponSets.HeroPrimaryWeapons,
-                BaseValue = 0.6,
+                BaseValue = 0.9,
                 SourceIsMultiplier = true,
                 SpeedPropertyChanges = true,
             }
         },
+        ExpandedProperties = true,
         WeaponSpeedMultiplier =
         {
             WeaponNames = game.WeaponSets.HeroPrimaryWeapons,
             Value = 
             {
-                BaseValue = 0.6,
+                BaseValue = 0.9,
                 SourceIsMultiplier = true,
             },
             ReportValues = { ReportedWeaponMultiplier = "Value" }
         },
         AllyDataModifiers =
         {
-            SpeedMultiplier = { BaseValue = 1.40, SourceIsMultiplier = true },
+            SpeedMultiplier = { BaseValue = 1.10, SourceIsMultiplier = true },
         },
         Name = "FireflyWeaponBoon", -- Added this as a name so it doesnt cry about it
         StatLines =
@@ -65,90 +66,7 @@ function CreateFireflyBoon()
         }
     }
     
-    game.TraitData.FireflyEffectBoon = {
-        Icon = "Boon_Hermes_02",
-        InheritFrom = { "BaseTrait", "EarthBoon" },
-		RarityLevels =
-		{
-			Common =
-			{
-				Multiplier = 1.0,
-			},
-			Rare =
-			{
-				Multiplier = 1.33,
-			},
-			Epic =
-			{
-				Multiplier = 1.67,
-			},
-			Heroic =
-			{
-				Multiplier = 2.00,
-			},
-		},
-        BlockStacking = false,
-		AddOutgoingDamageModifiers =
-		{
-			ValidWeaponMultiplier =
-			{
-				BaseValue = 1.50,
-				SourceIsMultiplier = true,
-				MinMultiplier = 0.125,
-				IdenticalMultiplier =
-				{
-					Value = -0.75,
-					DiminishingReturnsMultiplier = 0.5,
-				},
-			},
-			ValidWeapons = game.WeaponSets.HeroPrimaryWeapons,
-			ReportValues = { ReportedWeaponMultiplier = "ValidWeaponMultiplier"},
-		},
-		OnEnemyDamagedAction = 
-		{
-			ValidWeapons = game.WeaponSets.HeroPrimaryWeapons,			
-			FunctionName = "FireflyDamageShareApply",
-			Args = 
-			{
-				EffectName = "FireflyShareDamageEffect",
-			},			
-		},
-
-        StatLines =
-        {
-            "AttackDamageStatDisplay1",
-        },
-
-        ExtractValues =
-        {
-            {
-                Key = "ReportedWeaponMultiplier",
-                ExtractAs = "TooltipDamageBonus",
-                Format = "PercentDelta",
-            },
-            {
-                ExtractAs = "DamageShareDuration",
-                SkipAutoExtract = true,
-                External = true,
-                BaseType = "EffectData",
-                BaseName = "FireflyShareDamageEffect",
-                BaseProperty = "Duration",
-            },
-            {
-                ExtractAs = "DamageShareAmount",
-                SkipAutoExtract = true,
-                External = true,
-                BaseType = "EffectData",
-                BaseName = "FireflyShareDamageEffect",
-                BaseProperty = "Amount",
-                Format = "Percent",
-                HideSigns = true,
-            },
-        },
-    }
-    
     table.insert(game.LootSetData.Hermes.HermesUpgrade.Traits, "FireflyWeaponBoon")
-    table.insert(game.LootSetData.Hera.HeraUpgrade.Traits, "FireflyEffectBoon")
 end
 
 CreateFireflyBoon()
@@ -166,30 +84,25 @@ function printTable(tbl, indent)
     end
 end
 
+printTable(game.TraitData.HermesWeaponBoon)
+print("\n\n\n\n\n")
+printTable(game.TraitData.FireflyWeaponBoon)
+
 -- Name and description
 local TraitFirefly = sjson.to_object({
     Id = "FireflyWeaponBoon",
     InheritFrom = "BaseBoonMultiline",
-    DisplayName = "A Million FireFlies",
+    DisplayName = "A Million Fire Flies",
     Description = "Your {$Keywords.AttackSet} are faster.",
-}, Order) -- Don't forget the order, this is important
-
-local TraitFirefly_02 = sjson.to_object({
-    Id = "FireflyEffectBoon",
-    InheritFrom = "BaseBoonMultiline",
-    DisplayName = "Awake When I'm Asleep",
-    Description = "Your {$Keywords.AttackSet} deal more damage and inflict {$Keywords.Link}.",
 }, Order) -- Don't forget the order, this is important
 
 -- Pass in the (Global) file name you defined in sjson.lua
 sjson.hook(TraitTextFile, function(data)
     --data.texts is found at the top of the file, its the Texts table, it is different per file, second arguement is your local above
     table.insert(data.Texts, TraitFirefly)
-    table.insert(data.Texts, TraitFirefly_02)
     print("Hermes Boon Hook completed")
 end)
 
+print("\n\n")
 game.SetupRunData()
-printTable(game.TraitData.HeraWeaponBoon)
-print("\n\n##########\n##########\n\n")
-printTable(game.TraitData.FireflyEffectBoon)
+printTable(game.TraitData.FireflyWeaponBoon)
