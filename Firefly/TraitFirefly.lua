@@ -22,6 +22,15 @@ function CreateFireflyBoon()
                 Multiplier = 2.49,
             },
         },
+	OnEnemyDamagedAction = 
+	{
+		ValidWeapons = game.WeaponSets.HeroPrimaryWeapons,			
+		FunctionName = "ApplyDamageShare",
+		Args = 
+		{
+			EffectName = "DamageShareEffect",
+		},			
+	},
         PropertyChanges = {
 			{
 				WeaponNames = game.WeaponSets.HeroPrimaryWeapons,
