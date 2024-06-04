@@ -44,16 +44,16 @@ end
 
 function ProcessDamageShare( victim, triggerArgs)
 
-	if not victim.IsDead and victim.DamageShareAmount and HasEffectWithEffectGroup( victim, "DamageShare") and not triggerArgs.PureDamage and not IsEmpty(ActiveEnemies) and ( not victim.SkipModifiers or victim.BondAlwaysApplies) then
-		local range = EffectData.DamageShareEffect.Range
+	if not victim.IsDead and victim.DamageShareAmount and game.HasEffectWithEffectGroup( victim, "DamageShare") and not triggerArgs.PureDamage and not game.IsEmpty(game.ActiveEnemies) and ( not victim.SkipModifiers or victim.BondAlwaysApplies) then
+		local range = game.EffectData.FireflyShareDamageEffect.Range
 		local damageAmount = triggerArgs.DamageAmount * victim.DamageShareAmount		
-		for id, enemy in pairs( ActiveEnemies ) do
-			if enemy and victim and enemy ~= victim and not enemy.IsDead and IsEmpty( enemy.InvulnerableFlags )
-				and HasEffectWithEffectGroup( enemy, "DamageShare") and GetDistance({ Id = victim.ObjectId, DestinationId = enemy.ObjectId}) <= range then
+		for id, enemy in pairs( game.ActiveEnemies ) do
+			if enemy and victim and enemy ~= victim and not enemy.IsDead and game.IsEmpty( enemy.InvulnerableFlags )
+				and game.HasEffectWithEffectGroup( enemy, "DamageShare") and GetDistance({ Id = victim.ObjectId, DestinationId = enemy.ObjectId}) <= range then
 				CreateAnimationsBetween({ 
 					Animation = "HeraRope", DestinationId = enemy.ObjectId, Id = victim.ObjectId, 
 					Stretch = true, UseZLocation = false})
-				thread( Damage, enemy, { EffectName = "DamageShareEffect", DamageAmount = damageAmount, AttackerTable = CurrentRun.Hero, AttackerId = CurrentRun.Hero.ObjectId, Silent = false, PureDamage = true } )
+				game.thread( game.Damage, enemy, { EffectName = "FireflyShareDamageEffect", DamageAmount = damageAmount, AttackerTable = game.CurrentRun.Hero, AttackerId = game.CurrentRun.Hero.ObjectId, Silent = false, PureDamage = true } )
 			end
 		end
 	end
