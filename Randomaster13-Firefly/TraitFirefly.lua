@@ -1,4 +1,5 @@
 function CreateFireflyBoon()
+	-- This boon is the burn and speed attack boon.
     game.TraitData.FireflyWeaponBoon = {
     --adding this to hermes
         Icon = "FireflyIcon_1",
@@ -176,6 +177,9 @@ function CreateFireflyBoon()
 	-- 	}
 	-- }
 
+	-- #############################
+	-- This is the hitch effect boon
+	-- #############################
     game.TraitData.FireflyEffectBoon = {
         Icon = "Boon_Hermes_02",
         Name = "FireflyTestBoon", -- Added this as a name so it doesnt cry about it
