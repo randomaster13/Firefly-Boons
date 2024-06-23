@@ -1,8 +1,9 @@
 function CreateFireflyBoon()
 	-- This boon is the burn and speed attack boon.
-    game.TraitData.FireflyWeaponBoon = {
-    --adding this to hermes
-        Icon = "FireflyIcon_1",
+    game.TraitData.FireflyWeaponBoon = { --adding this to hermes
+        --Icon = "FireflyIcon_1",
+		--stupid icon doesn't work :(
+		Icon = "Boon_Hestia_01",
         InheritFrom = { "BaseTrait", "LegacyTrait", "FireBoon" },
         RarityLevels =
         {
@@ -23,6 +24,7 @@ function CreateFireflyBoon()
                 Multiplier = 1.50,
             },
         },
+		-- this applies the scorch damage
         OnEnemyDamagedAction = 
 		{
 			ValidWeapons = game.WeaponSets.HeroPrimaryWeapons,
@@ -32,7 +34,7 @@ function CreateFireflyBoon()
 				EffectName = "BurnEffect",
 				NumStacks = 
 				{
-					BaseValue = 10,
+					BaseValue = 10, -- base damage
 					MinValue = 1,
 					AbsoluteStackValues =
 					{
@@ -285,6 +287,7 @@ function CreateFireflyBoon()
 				Multiplier = 2,
 			},
 		},
+		-- the idea here is to reduce damage when sprinting.
 		OnSprintAction = 
 		{
 			AddIncomingDamageModifiers =
@@ -362,9 +365,11 @@ end)
 
 sjson.hook(GUIAnimationsFile, function (data)
     table.insert(data.Animations, boon_FireflyIcon_1)
+	-- please help me fix this dumb code :( it no work
 end)
 
-game.SetupRunData()
+game.SetupRunData() --need to run this for the hitch effect to work, gets run a half million times before it stops though.
+--these are for debugging
 --printTable(game.TraitData.HeraWeaponBoon)
 --print("\n\n##########\n##########\n\n")
 --printTable(game.TraitData.FireflyEffectBoon)
