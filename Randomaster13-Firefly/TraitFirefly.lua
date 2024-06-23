@@ -1,7 +1,7 @@
 function CreateFireflyBoon()
     game.TraitData.FireflyWeaponBoon = {
     --adding this to hermes
-        Icon = "Boon_Hermes_01",
+        Icon = "FireflyIcon_1",
         InheritFrom = { "BaseTrait", "LegacyTrait", "FireBoon" },
         RarityLevels =
         {
@@ -258,6 +258,41 @@ function CreateFireflyBoon()
             },
         },
     }
+	game.TraitData.FireflySprintBoon = {
+		Icon = "Boon_Apollo_03",
+		InheritFrom = { "BaseTrait", "FireBoon"},
+		Slot = "Rush",
+		RarityLevels =
+		{
+			Common =
+			{
+				Multiplier = 1.0,
+			},
+			Rare =
+			{
+				Multiplier = 4/3,
+			},
+			Epic =
+			{
+				Multiplier = 5/3,
+			},
+			Heroic =
+			{
+				Multiplier = 2,
+			},
+		},
+		OnSprintAction = 
+		{
+			AddIncomingDamageModifiers =
+			{
+				ValidWeaponMultiplier = 0.7,
+				ReportValues = 
+				{
+					ReportedMultiplier = "ValidWeaponMultiplier"
+				},
+			},
+		},
+	}
     
     table.insert(game.LootSetData.Hera.HeraUpgrade.Traits, "FireflyWeaponBoon")
     table.insert(game.LootSetData.Hera.HeraUpgrade.Traits, "FireflyEffectBoon")
@@ -303,6 +338,15 @@ local TraitFireflyTestBoon = sjson.to_object({
 
 }, Order) -- Don't forget the order, this is important
 
+-- Icon JSON data
+local boon_FireflyIcon_1 = sjson.to_object({
+
+		Name = "FireflyIcon_1",
+		InheritFrom = "BoonIcon",
+		FilePath = rom.path.combine(_PLUGIN.guid, 'boons\\Firefly_1'),
+
+}, IconOrder)
+
 -- Pass in the (Global) file name you defined in sjson.lua
 sjson.hook(TraitTextFile, function(data)
     --data.texts is found at the top of the file, its the Texts table, it is different per file, second arguement is your local above
@@ -310,6 +354,10 @@ sjson.hook(TraitTextFile, function(data)
     table.insert(data.Texts, TraitFirefly_02)
     table.insert(data.Texts, TraitFireflyTestBoon)
     print("Boon Hook completed")
+end)
+
+sjson.hook(GUIAnimationsFile, function (data)
+    table.insert(data.Animations, boon_FireflyIcon_1)
 end)
 
 game.SetupRunData()

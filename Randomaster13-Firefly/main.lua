@@ -30,11 +30,13 @@ chalk = mods["SGG_Modding-Chalk"]
 ---@module 'SGG_Modding-ReLoad'
 reload = mods['SGG_Modding-ReLoad']
 
----@module 'Firefly-config'
+---@module 'Randomaster13-Firefly-config'
 config = chalk.auto 'config.lua'
 public.config = config
 
 local function on_ready()
+    import_as_fallback(rom.game)
+
 	import 'sjson.lua'
     import 'ready.lua'
     
@@ -45,6 +47,8 @@ local function on_ready()
 end
 
 local function on_reload()
+    import_as_fallback(rom.game)
+
     import 'reload.lua'
 end
 
