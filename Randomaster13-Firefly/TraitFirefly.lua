@@ -3,7 +3,8 @@ function CreateFireflyBoon()
     game.TraitData.FireflyWeaponBoon = { --adding this to hermes
         --Icon = "FireflyIcon_1",
 		--stupid icon doesn't work :(
-		Icon = "Boon_Hestia_01",
+
+		Icon = "Boon_Hestia_01", -- temporary Icon
         InheritFrom = { "BaseTrait", "LegacyTrait", "FireBoon" },
         RarityLevels =
         {
@@ -289,20 +290,31 @@ function CreateFireflyBoon()
 		},
 		-- the idea here is to reduce damage when sprinting.
 		OnSprintAction = 
+		-- OnSprintAction doesn't seem to work, will need a different function to make this work for sure.
 		{
 			AddIncomingDamageModifiers =
 			{
-				ValidWeaponMultiplier = 0.7,
+				ValidWeaponMultiplier = 0.1,
 				ReportValues = 
 				{
 					ReportedMultiplier = "ValidWeaponMultiplier"
 				},
 			},
 		},
+		ExtractValues =
+		{
+			{
+				Key = "ReportedMultiplier",
+				ExtractAs = "TooltipDamageResistance",
+				Format = "NegativePercentDelta",
+				SkipAutoExtract = true
+			},
+		},
 	}
     
     table.insert(game.LootSetData.Hera.HeraUpgrade.Traits, "FireflyWeaponBoon")
     table.insert(game.LootSetData.Hera.HeraUpgrade.Traits, "FireflyEffectBoon")
+	table.insert(game.LootSetData.Hera.HeraUpgrade.Traits, "FireflySprintBoon")
     ---table.insert(game.LootSetData.Hera.HeraUpgrade.Traits, "FireflyTestBoon")
 end
 
@@ -345,6 +357,15 @@ local TraitFireflyTestBoon = sjson.to_object({
 
 }, Order) -- Don't forget the order, this is important
 
+local TraitFirefly_03 = sjson.to_object({
+
+    Id = "FireflySprintBoon",
+    InheritFrom = "BaseBoonMultiline",
+    DisplayName = "Teach Me How To Dance",
+    Description = "While sprinting you take {#BoldFormatGraft}-{$TooltipData.ExtractData.TooltipDamageResistance}% {#Prev}damage.", -- Should say "while sprinting you take ##% less damage"
+
+}, Order)
+
 -- Icon JSON data
 local boon_FireflyIcon_1 = sjson.to_object({
 
@@ -360,6 +381,7 @@ sjson.hook(TraitTextFile, function(data)
     table.insert(data.Texts, TraitFirefly)
     table.insert(data.Texts, TraitFirefly_02)
     table.insert(data.Texts, TraitFireflyTestBoon)
+	table.insert(data.Texts, TraitFirefly_03)
     print("Boon Hook completed")
 end)
 
