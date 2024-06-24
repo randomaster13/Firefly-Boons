@@ -1,10 +1,10 @@
 function CreateFireflyBoon()
 	-- This boon is the burn and speed attack boon.
     game.TraitData.FireflyWeaponBoon = { --adding this to hermes
-        --Icon = "FireflyIcon_1",
+        Icon = "FireflyIcon_1",
 		--stupid icon doesn't work :(
 
-		Icon = "Boon_Hestia_01", -- temporary Icon
+		--Icon = "Boon_Hestia_01", -- temporary Icon
         InheritFrom = { "BaseTrait", "LegacyTrait", "FireBoon" },
         RarityLevels =
         {
@@ -371,7 +371,7 @@ local boon_FireflyIcon_1 = sjson.to_object({
 
 		Name = "FireflyIcon_1",
 		InheritFrom = "BoonIcon",
-		FilePath = rom.path.combine(_PLUGIN.guid, 'boons\\Firefly_1'),
+		FilePath = rom.path.combine(_PLUGIN.guid, 'C:\\Users\\Benjamin\\AppData\\Roaming\\r2modmanPlus-local\\HadesII\\profiles\\Default\\ReturnOfModding\\plugins\\Randomaster13-Firefly\\img'),
 
 }, IconOrder)
 
