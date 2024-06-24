@@ -371,7 +371,7 @@ local boon_FireflyIcon_1 = sjson.to_object({
 
 		Name = "FireflyIcon_1",
 		InheritFrom = "BoonIcon",
-		FilePath = 'Firefly-Randomaster13\\img\\boons\\Firefly_1'
+		FilePath = rom.path.combine(_PLUGIN.guid, 'boons\\Firefly_1'),
 
 }, IconOrder)
 
