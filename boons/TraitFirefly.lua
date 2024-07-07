@@ -288,28 +288,54 @@ function CreateFireflyBoon()
 				Multiplier = 2,
 			},
 		},
-		-- the idea here is to reduce damage when sprinting.
+		-- the idea here is to add a dodge chance while sprinting, this is not working however.
 		OnSprintAction = 
-		-- OnSprintAction doesn't seem to work, will need a different function to make this work for sure.
 		{
-			AddIncomingDamageModifiers =
+			--my theory is that this doesn't work :/
+			PropertyChanges =
 			{
-				ValidWeaponMultiplier = 0.1,
-				ReportValues = 
 				{
-					ReportedMultiplier = "ValidWeaponMultiplier"
+					LifeProperty = "DodgeChance",
+					BaseValue = 0.40,
+					ChangeType = "Add",
+					DataValue = false,
+					ReportValues = { ReportedDodgeChance = "ChangeValue"},
 				},
 			},
+		},
+		OnSprintEndAction = 
+		{
+			PropertyChanges =
+			{
+				{
+					LifeProperty = "DodgeChance",
+					BaseValue = 0,
+					ChangeType = "Add",
+					DataValue = false,
+				},
+			},
+		},
+		StatLines =
+		{
+			"DodgeChanceStatDisplay1",
 		},
 		ExtractValues =
 		{
 			{
-				Key = "ReportedMultiplier",
-				ExtractAs = "TooltipDamageResistance",
-				Format = "NegativePercentDelta",
-				SkipAutoExtract = true
+					Key = "ReportedDodgeChance",
+					ExtractAs = "TooltipDodgeBonus",
+					Format = "Percent",
 			},
 		},
+		-- ExtractValues =
+		-- {
+		-- 	{
+		-- 		Key = "ReportedMultiplier",
+		-- 		ExtractAs = "TooltipDamageResistance",
+		-- 		Format = "NegativePercentDelta",
+		-- 		SkipAutoExtract = true
+		-- 	},
+		-- },
 	}
     
     table.insert(game.LootSetData.Hera.HeraUpgrade.Traits, "FireflyWeaponBoon")
@@ -362,7 +388,7 @@ local TraitFirefly_03 = sjson.to_object({
     Id = "FireflySprintBoon",
     InheritFrom = "BaseBoonMultiline",
     DisplayName = "Teach Me How To Dance",
-    Description = "While sprinting you take {#BoldFormatGraft}-{$TooltipData.ExtractData.TooltipDamageResistance}% {#Prev}damage.", -- Should say "while sprinting you take ##% less damage"
+    Description = "While sprinting you have a {#BoldFormatGraft}-{$TooltipData.ExtractData.ReportedDodgeChance}% {#Prev} to dodge.", -- Should say "while sprinting you take ##% less damage"
 
 }, Order)
 
